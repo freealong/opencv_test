@@ -8,6 +8,6 @@
 #include "ex.hpp"
 
 int main(int argc, char** argv) {
-  return ex2_3(argc, argv);
+  return ex2_4(argc, argv);
 }
 

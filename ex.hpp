@@ -12,4 +12,5 @@ int ex2_2(int argc, char** argv);
 
 int ex2_3(int argc, char** argv);
 
+int ex2_4(int argc, char** argv);
 #endif /* EX_HPP_ */
