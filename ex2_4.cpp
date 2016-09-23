@@ -13,8 +13,9 @@
 using namespace std;
 using namespace cv;
 
-void onTrackbarSlide(int pos, void*) {
-
+void onTrackbarSlide(int pos, void* p) {
+  VideoCapture* cap = (VideoCapture*)p;
+  cap->set(CV_CAP_PROP_POS_FRAMES, pos);
 }
 
 int ex2_4(int argc, char** argv) {
@@ -29,7 +30,8 @@ int ex2_4(int argc, char** argv) {
   int tmph = (int)g_cap.get(CV_CAP_PROP_FRAME_HEIGHT);
   cout << "Video has " << frames << "frames of dimensions ("
       << tmpw << ", " << ")." << endl;
-  createTrackbar("Position", "example", &g_slider_position, frames, onTrackbarSlide);
+  createTrackbar("Position", "example", &g_slider_position, frames,
+                 onTrackbarSlide, &g_cap);
   Mat frame;
   while (true) {
     if (g_run != 0) {
@@ -39,7 +41,7 @@ int ex2_4(int argc, char** argv) {
       g_dontset = 1;
       setTrackbarPos("Position", "example", current_pos);
       imshow("example", frame);
-      g_run = -1;
+      g_run -= 1;
     }
     char c = (char)waitKey(10);
     if (c == 's') {
